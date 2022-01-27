@@ -3,14 +3,17 @@ require('./config/passport');
 const express = require('express');
 const cors = require('cors');
 const userRoute = require('./routes/userRoute');
+const transactionRoute = require('./routes/transactionRoute');
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-// Create Route 
+// Create User Route 
 app.use('/users', userRoute);
+// Create Transaction Route
+app.use('/transactions', transactionRoute);
 
 app.use((req, res) => {
     res.status(404).json({ message: 'resource not found on this server' });

@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     );
 
     TransactionType.associate = models => {
-        TransactionType.hasMany(models.Transaction, {
+        TransactionType.belongsTo(models.Transaction, {
             foreignKey: {
                 name: 'transactionTypeId',
                 allowNull: false

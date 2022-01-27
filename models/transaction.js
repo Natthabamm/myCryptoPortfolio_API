@@ -17,6 +17,9 @@ module.exports = (sequelize, DataTypes) => {
             totalSpent: {
                 type: DataTypes.DECIMAL,
                 allowNull: false
+            },
+            datetime: {
+                type: DataTypes.DATE
             }
             
         },
@@ -33,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
             }
         });
 
-        Transaction.hasOne(models.TransactionType, {
+        Transaction.hasMany(models.TransactionType, {
             foreignKey: {
                 name: 'transactionTypeId',
                 allowNull: false

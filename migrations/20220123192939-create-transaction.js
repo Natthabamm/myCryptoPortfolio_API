@@ -38,7 +38,10 @@ module.exports = {
         allowNull: false
       },
       datetime: {
-        type: Sequelize.DATE,
+        type: Sequelize.DATE
+      },
+      price_per_coin: {
+        type: Sequelize.DECIMAL,
         allowNull: false
       },
       total_spent: {
