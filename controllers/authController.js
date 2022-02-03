@@ -55,7 +55,11 @@ exports.login = async (req, res, next) => {
         const isEmail = emailFormat.test(email);
         let user;
         if (isEmail) {
-            user = await User.findOne({ email: email });
+            user = await User.findOne({  
+                where: {
+                    email: email
+                } 
+            });
         }
 
         if (!user) {
@@ -71,7 +75,7 @@ exports.login = async (req, res, next) => {
                 .status(400)
                 .json({ message: 'invalid email or password' });
         };
-
+        
         const payload = {
             id: user.id,
             username: user.username,
