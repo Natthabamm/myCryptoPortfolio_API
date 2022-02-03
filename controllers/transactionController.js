@@ -4,10 +4,10 @@ const { Transaction, User, sequelize } = require("../models");
 
 exports.createTransaction = async (req, res, next) => {
   try {
-    const { transactionTypeId, coinName, quanity, totalSpent, pricePerCoin } =
+    const { transactionType, coinName, quanity, pricePerCoin, date, time, totalSpent, currency  } =
       req.body;
       console.log(req.body)
-    if (!transactionTypeId && !coinName && !quanity  && !totalSpent && !pricePerCoin) {
+    if (!transactionType && !coinName && !quanity && !pricePerCoin  && !date && !time && !totalSpent && !currency ) {
       return res
         .status(400)
         .json({
@@ -18,11 +18,14 @@ exports.createTransaction = async (req, res, next) => {
 
     const transaction = await Transaction.create({
         userId: req.user.id,
-        transactionTypeId,
+        transactionType,
         coinName,
         quanity,
+        pricePerCoin,
+        date,
+        time,
         totalSpent,
-        pricePerCoin
+        currency
     })
 
     res.status(201).json({ transaction });
@@ -30,3 +33,5 @@ exports.createTransaction = async (req, res, next) => {
     next(err);
   }
 };
+
+

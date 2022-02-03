@@ -19,15 +19,9 @@ module.exports = {
           key: 'id'
         }
       },
-      transaction_type_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: {
-            tableName: 'transactiontypes'
-          },
-          key: 'id'
-        }
+      transaction_type: {
+        type: Sequelize.STRING,
+        allowNull: false
       },
       coin_name: {
         type: Sequelize.STRING,
@@ -37,15 +31,24 @@ module.exports = {
         type: Sequelize.DECIMAL,
         allowNull: false
       },
-      datetime: {
-        type: Sequelize.DATE
-      },
       price_per_coin: {
         type: Sequelize.DECIMAL,
         allowNull: false
       },
+      date: {
+        type: Sequelize.DATEONLY,
+        allowNull: false
+      },
+      time:{
+        type: Sequelize.TIME,
+        allowNull: false
+      },
       total_spent: {
         type: Sequelize.DECIMAL,
+        allowNull: false
+      },
+      currency: {
+        type: Sequelize.STRING,
         allowNull: false
       }
     });

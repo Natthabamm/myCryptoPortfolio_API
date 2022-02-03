@@ -2,6 +2,14 @@ module.exports = (sequelize, DataTypes) => {
     const Transaction = sequelize.define(
         'Transaction', 
         {
+            transactionType: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                defaultValue: 'BUY',
+                validate: {
+                    isIn: [['BUY', 'SELL']]
+                }
+            },
             coinName: { 
                 type: DataTypes.STRING,
                 allowNull: false
@@ -18,13 +26,23 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.DECIMAL,
                 allowNull: false
             },
-            datetime: {
-                type: DataTypes.DATE
+            date: {
+                type: DataTypes.DATEONLY,
+                allowNull: false
+            },
+            time: {
+                type: DataTypes.TIME,
+                allowNull: false
+            },
+            currency: {
+                type: DataTypes.STRING,
+                allowNull: false
             }
             
         },
         {
-            underscored: true
+            underscored: true,
+            timestamps: false
         }
     );
 
@@ -32,13 +50,6 @@ module.exports = (sequelize, DataTypes) => {
         Transaction.belongsTo(models.User, {
             foreignKey: {
                 name: 'userId',
-                allowNull: false
-            }
-        });
-
-        Transaction.hasMany(models.TransactionType, {
-            foreignKey: {
-                name: 'transactionTypeId',
                 allowNull: false
             }
         });
