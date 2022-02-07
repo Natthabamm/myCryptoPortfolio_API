@@ -1,5 +1,5 @@
 const { Op } = require("sequelize");
-const { Transaction, User, sequelize } = require("../models");
+const { Transaction } = require("../models");
 
 exports.getAllTransactions = async (req, res, next) => {
   try {
@@ -41,7 +41,7 @@ exports.createTransaction = async (req, res, next) => {
       date,
       time,
       totalSpent,
-      currency
+      currencies
     } = req.body;
 
     if (
@@ -52,7 +52,7 @@ exports.createTransaction = async (req, res, next) => {
       !date &&
       !time &&
       !totalSpent &&
-      !currency
+      !currencies
     ) {
       return res.status(400).json({
         message:
@@ -69,7 +69,7 @@ exports.createTransaction = async (req, res, next) => {
       date,
       time,
       totalSpent,
-      currency,
+      currencies,
     });
 
     res.status(201).json({ transaction });

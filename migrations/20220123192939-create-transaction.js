@@ -47,7 +47,7 @@ module.exports = {
         type: Sequelize.DECIMAL,
         allowNull: false
       },
-      currency: {
+      currencies: {
         type: Sequelize.STRING,
         allowNull: false
       }

@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.TIME,
                 allowNull: false
             },
-            currency: {
+            currencies: {
                 type: DataTypes.STRING,
                 allowNull: false
             }
