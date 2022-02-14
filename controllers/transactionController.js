@@ -3,10 +3,12 @@ const { Transaction } = require("../models");
 
 exports.getAllTransactions = async (req, res, next) => {
   try {
+    console.log(req.user.id)
     const transactions = await Transaction.findAll({
       where: { userId: req.user.id },
       order: [["date", "DESC"]],
     });
+    console.log(transactions)
     if (!transactions) {
       return res.status(404).json({ message: "transaction not found" });
     }
