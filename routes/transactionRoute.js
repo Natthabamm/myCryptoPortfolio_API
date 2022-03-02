@@ -9,5 +9,6 @@ router.get('/', authenticate, transactionController.getAllTransactions);
 router.post('/', authenticate, transactionController.createTransaction);
 router.patch('/:id', authenticate, transactionController.updateTransaction);
 router.delete('/:id', authenticate, transactionController.deleteTransaction);
+router.delete('/all/:coinName', authenticate, transactionController.deleteTransactionAll);
 
 module.exports = router;

@@ -3,7 +3,6 @@ const { Transaction } = require("../models");
 
 exports.getAllTransactions = async (req, res, next) => {
   try {
-    console.log(req.user.id)
     const transactions = await Transaction.findAll({
       where: { userId: req.user.id },
       order: [["date", "DESC"]],
@@ -120,6 +119,29 @@ exports.deleteTransaction = async (req, res, next) => {
     if (!transaction) {
       return res.status(404).json({ message: "transaction not found" });
     }
+    await transaction.destroy();
+
+    res.status(204).json({ message: "delete transaction completed" });
+  } catch (err) {
+    next(err);
+  }
+};
+
+// feature in the future
+exports.deleteTransactionAll = async (req, res, next) => {
+  try {
+    const { coinName } = req.params;
+    console.log(coinName)
+    console.log(req.user.id)
+    const transaction = await Transaction.findAll({
+      where: {
+        [Op.and]: [{ coinName }, { userId: req.user.id }],
+      },
+    });
+    if (!transaction) {
+      return res.status(404).json({ message: "transaction not found" });
+    }
+    console.log(transaction)
     await transaction.destroy();
 
     res.status(204).json({ message: "delete transaction completed" });
